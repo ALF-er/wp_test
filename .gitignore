@@ -1,0 +1,3 @@
+*.bckp
+node_modules/
+dist/
