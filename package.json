@@ -2,14 +2,16 @@
   "name": "WP_Test",
   "version": "0.0.1",
   "description": "Webpack test",
-  "dependencies": {
+  "scripts": {
+    "build:webpack": "webpack -p --progress --colors",
+    "build": "npm run build:webpack",
+    "predev": "webpack -d -h --progress --colors",
+    "dev": "webpack-dev-server --hot --content-base ./dist/ --port 4000 --history-api-fallback"
   },
+  "dependencies": {},
   "devDependencies": {
-      "css-loader": "^0.9.1",
-      "image-loader": "0.0.1",
-      "style-loader": "^0.8.3",
-      "url-loader": "^0.5.5",
-      "webpack": "^1.5.3",
-      "yargs": "^2.3.0"
+    "webpack": "^1.7.3",
+    "webpack-dev-server": "^1.8.0",
+    "yargs": "^3.6.0"
   }
 }
