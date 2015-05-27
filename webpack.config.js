@@ -11,12 +11,12 @@ module.exports = {
 	entry: (function() {
 		var entry = [];
 
-		if (argv.h) {
-			entry.push("webpack-dev-server/client?/");
-			entry.push("webpack/hot/dev-server");
-		}
+		// if (argv.h) {
+		// 	entry.push("webpack-dev-server/client?/");
+		// 	entry.push("webpack/hot/dev-server");
+		// }
 
-		entry.push(path.join(__dirname, "src", "app", "main.js"));
+		entry.push(path.join(__dirname, "src", "app", "entrypoints", "main.jsx"));
 
 		return {
 			main: entry
@@ -32,22 +32,30 @@ module.exports = {
 	module: {
 		loaders: [
 			{
-				test:    /\.js$/,
-				exclude: /\/node_modules\//,
-				loaders: []
+				test:    /fetch.js$/,
+				loaders: [
+					"exports?fetch=window.fetch.bind(window),Headers=window.Headers,Request=window.Request,Response=window.Response",
+					"babel"
+				]
+			},
+
+			{
+				test:    /\.jsx$/,
+				exclude: [/node_modules/],
+				loaders: ["babel"]
 			}
 		]
 	},
 
 	resolve: {
-		extensions:         ["", ".js", ".jsx"],
+		extensions:         ["", ".js", ".jsx", ],
 		root:               path.join(__dirname, "src", "app"),
 		modulesDirectories: ["web_modules", "node_modules", "src"]
 	},
 
 	cache:   !argv.p,
 	debug:   !argv.p,
-	devtool: !argv.p ? "sourcemap" : false,
+	devtool: !argv.p ? "eval-cheap-module-source-map" : false,
 
 	stats: {
 		colors:  true,
@@ -76,7 +84,6 @@ module.exports = {
 		}
 
 		if (argv.h) {
-			plugins.push(new webpack.HotModuleReplacementPlugin());
 			plugins.push(new webpack.NoErrorsPlugin());
 		}
 

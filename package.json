@@ -5,13 +5,19 @@
   "scripts": {
     "build:webpack": "webpack -p --progress --colors",
     "build": "npm run build:webpack",
-    "predev": "webpack -d -h --progress --colors",
-    "dev": "webpack-dev-server --hot --content-base ./dist/ --port 4000 --history-api-fallback"
+    "predev1": "webpack -d -h --progress --colors",
+    "dev": "webpack-dev-server --hot --content-base ./dist/ --port 4000 --history-api-fallback --inline"
   },
-  "dependencies": {},
+  "dependencies": {
+    "whatwg-fetch": "^0.8.2"
+  },
   "devDependencies": {
-    "webpack": "^1.7.3",
-    "webpack-dev-server": "^1.8.0",
-    "yargs": "^3.6.0"
+    "babel-core": "^5.1.13",
+    "babel-loader": "^5.0.0",
+    "exports-loader": "^0.6.2",
+    "react-hot-loader": "^1.2.5",
+    "webpack": "^1.8.11",
+    "webpack-dev-server": "^1.8.2",
+    "yargs": "^3.8.0"
   }
 }
